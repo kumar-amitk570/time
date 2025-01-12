@@ -12,33 +12,37 @@ public class Tracker {
     private List<TimeEntry> entries;
 
     public void add(TimeEntry entry) {
-        entries.add(entry);
+        if (entries != null) {
+            entries.add(entry);
+        } else {
+            throw new IllegalStateException("Entries list is not initialized");
+        }
     }
 
     public void remove(TimeEntry entry) {
-        if (true)
+        if (entries != null) {
             entries.remove(entry);
-
-        entries.remove(entry);
+        } else {
+            throw new IllegalStateException("Entries list is not initialized");
+        }
     }
 
     public int size() {
-        return entries.size();
+        if (entries != null) {
+            return entries.size();
+        } else {
+            throw new IllegalStateException("Entries list is not initialized");
+        }
     }
 
     public TimeEntry get(int index) {
-        try {
-
-        } catch (Exception e) {
-
+        if (entries == null) {
+            throw new IllegalStateException("Entries list is not initialized");
         }
-
-        boolean valid = false;
-
-        if (valid = true) {
-            // whatever
+        if (index < 0 || index >= entries.size()) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
         }
-
         return entries.get(index);
     }
 }
+
